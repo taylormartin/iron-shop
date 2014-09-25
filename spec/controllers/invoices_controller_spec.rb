@@ -21,6 +21,25 @@ describe InvoicesController, :js do
     expect( response ).to redirect_to invoice_path(Invoice.last)
     expect( flash[:notice]).to match(/^Successfully checked out/)
   end
-  it "takes a valid payment to close an invoice"
-  it "notifies on invalid payment"
+  describe "when paying" do
+    before :each do
+      @invoice = create :invoice
+      sign_in @invoice.user
+    end
+    it "takes a valid payment to close an invoice" do
+      post :close, id: @invoice.id, stripeToken: CardProcessor.valid_token
+      @invoice.reload
+
+      expect( flash[:success] ).to eq "Your purchase went through"
+      expect( @invoice.paid? ).to be true
+    end
+    it "notifies on invalid payment" do
+      post :close, id: @invoice.id, stripeToken: CardProcessor.declined_token
+      @invoice.reload
+
+      expect( flash[:error] ).to eq "Couldn't process card"
+      expect( @invoice.paid? ).to be false
+    end
+  end
+
 end
