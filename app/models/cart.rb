@@ -35,6 +35,7 @@ class Cart
   def checkout!
     invoice = Invoice.new(user: @shopper, amount: self.total)
     invoice.save!
+    invoice
   end
 
 end

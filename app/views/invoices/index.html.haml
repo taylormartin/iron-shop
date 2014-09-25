@@ -1,0 +1,22 @@
+.row(ng-controller="invoicesCtrl")
+  .col-md-2
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        %h4 Your Invoices
+      %ul.list-group
+        %table.table
+          %thead
+            %tr
+              %th #
+              %th Amount
+              %th Payment
+          %tbody
+            %tr(ng-repeat="invoice in invoices")
+              %td
+                %a(ng-href="/invoices/{{invoice.id}}")= '{{invoice.id}}'
+              %td
+                %a(ng-href="/invoices/{{invoice.id}}")= '{{invoice.amount | currency}}'
+              %td
+                %a(ng-href="/invoices/{{invoice.id}}")= '{{paidDisplay(invoice.paid)}}'
+  .col-md-2

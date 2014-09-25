@@ -1,0 +1,13 @@
+.row(ng-controller="invoiceCtrl")
+  .col-md-2
+  .col-md-8
+    %h3.text-center
+      %span.label.label-default= '{{ paidDisplay(invoicePaid) }}'
+    .panel.panel-default
+      .panel-heading.clearfix
+        .pull-left= 'Invoice #{{invoiceId}}'
+        .pull-right= '{{invoiceAmount | currency}}'
+      %ul.list-group
+        %li.list-group-item.clearfix(ng-repeat="item in invoiceItems")
+          .pull-left= '{{item.title}}'
+  .col-md-2

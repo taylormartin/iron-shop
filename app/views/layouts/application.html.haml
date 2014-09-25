@@ -16,7 +16,11 @@
           = link_to "Home", root_path, class: "navbar-brand"
 
         %ul.nav.navbar-nav
-          %li= link_to "Shopping Cart", cart_path
+          %li
+            = link_to cart_path do
+              %span.glyphicon.glyphicon-shopping-cart
+              = '{{total | currency}}'
+          %li= link_to "Invoices", invoices_path
           -#= '{{@cart.items.count}}'
           -#= '{{@cart.total}}'
 
