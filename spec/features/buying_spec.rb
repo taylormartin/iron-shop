@@ -7,14 +7,14 @@ feature 'Buying' do
 
     create :item
   end
- describe 'No Selenium' do 
+ describe 'No Selenium' do
   it 'shows the user a list of all items by default' do
     item = create :item
     visit root_path
     expect( page ).to have_content item.title
   end
 
-  it 'lets buyers search for items' do
+  xit 'lets buyers search for items' do
     item_1 = create :item
     item_2 = create :item
     visit root_path
@@ -30,7 +30,6 @@ feature 'Buying' do
     expect(page).not_to have_css('.item')
     visit items_path
     click_link("Add to Cart", match: :first)
-    item = Item.first
     expect(page).to have_css('.item')
   end
 
@@ -51,6 +50,14 @@ feature 'Buying' do
     expect(page).not_to have_css('.item')
   end
   
-  it 'lets buyers checkout'
+  it 'lets buyers checkout' do
+    visit items_path
+    click_link("Add to Cart", match: :first)
+    expect(page).to have_css('.item')
+    find('.checkout').click
+    expect(page).to have_text "Unpaid"
+    expect(page).to have_content Item.first.title
+    expect(page).to have_content Invoice.last.amount
+  end
  end
 end

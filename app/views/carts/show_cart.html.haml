@@ -10,16 +10,22 @@
           %p
             %strong= '{{item.title}}'
             %a.btn.btn-warning.btn-xs.pull-right.remove-button(ng-click='delete_item(item.id)')= "Remove"
-            %em.small= ' by {{item.seller_id}}'
+            -#%em.small= ' by {{item.seller_id}}'
             .pull-right= '{{item.price | currency}}'
           %p= '{{item.description}}'
-        %li.list-group-item.clearfix
-          %h3.pull-left Subtotal
-          %h3.pull-right= '{{subtotal | currency}}'
-        %li.list-group-item.clearfix
-          %h3.pull-left Tax Rate
-          %h3.pull-right= '{{tax_rate * 100}}%'
-        %li.list-group-item.clearfix
-          %h3.pull-left Total
-          %h3.pull-right= '{{total | currency}}'
+        %div(ng-hide= 'items')
+          %li.list-group-item
+            %h3.text-center You have nothing in your cart!
+        %div(ng-show= 'items')
+          %li.list-group-item.clearfix
+            %h5.pull-left Subtotal
+            %h5.pull-right= '{{subtotal | currency}}'
+          %li.list-group-item.clearfix
+            %h5.pull-left Tax Rate
+            %h5.pull-right= '{{tax_rate * 100}}%'
+          %li.list-group-item.clearfix
+            %h4.pull-left Total
+            %h4.pull-right= '{{total | currency}}'
+          %li.list-group-item.clearfix
+            =link_to "Checkout", invoices_path, method: :post, :class => "btn btn-success pull-right checkout"
   .col-md-2

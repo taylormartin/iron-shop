@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   root to: "items#index"
 
   resources :items, only: [:index, :new, :create, :update, :show]
+  resources :invoices, only: [:index, :show, :create] do
+    member do
+      post :close
+    end
+  end
 
   scope '/cart' do
     get "/" => "carts#show_cart", :as => "cart"
