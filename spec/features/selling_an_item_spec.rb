@@ -47,7 +47,7 @@ feature 'Selling' do
   it 'requires users to be sellers before listing an item' do
     login @shopper
     visit new_item_path
-    expect(page).to have_content 'You are not authorized to list items!'
+    expect( page ).to have_content 'not authorized'
   end
 
 end

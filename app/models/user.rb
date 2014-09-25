@@ -6,4 +6,12 @@ class User < ActiveRecord::Base
 
   has_many :invoices
   has_many :items_for_sale, class: Item
+
+  def shopper?
+    self.role == nil || self.role.downcase == "shopper"
+  end
+
+  def seller?
+    self.role.downcase == "seller"
+  end
 end

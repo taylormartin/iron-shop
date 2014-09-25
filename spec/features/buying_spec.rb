@@ -14,14 +14,28 @@ feature 'Buying' do
     expect( page ).to have_content item.title
   end
 
-  xit 'lets buyers search for items' do
-    item_1 = create :item
-    item_2 = create :item
+  it 'lets buyers search for items' do
+    item_1 = create :item, title: "foo", description: "foo 1"
+    item_2 = create :item, title: "bar", description: "bar 2"
     visit root_path
+    within('form') do
+      fill_in "search_input", with: item_1.title 
+    end
+    click_button "Search"
     #get search controller method via ajax for item_1.title
     expect( page ).to have_content item_1.title
     expect( page ).to_not have_content item_2.title
   end
+
+  it 'lets buyers view more details about an item' do
+    item_1 = create :item, title: "Show Test"
+    visit root_path
+    expect( page ).to have_content item_1.title
+    click_link(item_1.title, match: :first)
+    expect( page.current_path).to eq item_path(item_1)
+    expect( page ).to have_content item_1.title
+  end
+  
  end
 
  describe 'Selenium', :js do
