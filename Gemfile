@@ -11,6 +11,7 @@ gem 'haml-rails'
 gem 'figaro'
 gem 'gon'
 gem 'bullet'
+gem 'stripe'
 
 
 gem 'jbuilder', '~> 2.0'

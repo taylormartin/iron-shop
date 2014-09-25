@@ -10,4 +10,10 @@
       %ul.list-group
         %li.list-group-item.clearfix(ng-repeat="item in invoiceItems")
           .pull-left= '{{item.title}}'
+    =form_tag close_invoice_path(@invoice), 'ng-show' => '!invoicePaid' do
+      %script.stripe-button{ 'src' => "https://checkout.stripe.com/checkout.js",
+        "data-key" => ENV['STRIPE_PUBLISHABLE_KEY'],
+        'data-amount' => (@invoice.amount * 100).to_i,
+        "data-name" => "Iron Shop",
+        'data-description' => "#{@invoice.items.count} items" }
   .col-md-2

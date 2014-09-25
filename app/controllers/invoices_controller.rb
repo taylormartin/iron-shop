@@ -28,9 +28,8 @@ class InvoicesController < ApplicationController
     begin
       CardProcessor.new(@invoice, params[:stripeToken]).process
       flash[:success] = "Your purchase went through"
-    rescue
-      flash[:error] = e.message
-
+    rescue Stripe::CardError => e
+      flash[:error] = "Couldn't process card"
     end
     redirect_to invoice_path(@invoice)
   end
