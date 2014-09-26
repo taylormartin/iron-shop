@@ -1,0 +1,28 @@
+.modal.fade#new-coupon-modal(tabindex="-1" role="dialog")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4.modal-title New Coupon
+      .modal-body
+      .modal-footer
+        %button.btn.btn-primary Create Coupon
+.row
+  .col-md-2
+  .col-md-8(ng-controller = "CouponsCtrl")
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Status
+          %th ID
+          %th Coupon Code
+          %th Discount Amount
+      %tbody
+        %tr(ng-repeat='coupon in coupons')
+          %td
+            .label.label-success(ng-if="coupon.status") Active
+            .label.label-default(ng-if='!coupon.status') Inactive
+          %td= '{{coupon.id}}'
+          %td= '{{coupon.code}}'
+          %td= '{{coupon.discount}}'
+    %button.btn.btn-default.pull-right(ng-click="openCouponModal()") New Coupon
+  .col-md-2

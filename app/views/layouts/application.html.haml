@@ -21,8 +21,8 @@
               %span.glyphicon.glyphicon-shopping-cart
               = '{{total | currency}}'
           %li= link_to "Invoices", invoices_path
-          -#= '{{@cart.items.count}}'
-          -#= '{{@cart.total}}'
+          -if can? :index, Coupon
+            %li= link_to "Coupons", coupons_path
 
         %ul.nav.navbar-nav.pull-right
           - if current_user

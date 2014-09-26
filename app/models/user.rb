@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :invoices
+  has_many :coupons
   has_many :items_for_sale, class: Item
 
   def shopper?

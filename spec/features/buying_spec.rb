@@ -63,6 +63,7 @@ feature 'Buying' do
     find('.remove-button').click
     expect(page).not_to have_css('.item')
   end
+
   
   it 'lets buyers checkout' do
     visit items_path
@@ -72,6 +73,19 @@ feature 'Buying' do
     expect(page).to have_text "Unpaid"
     expect(page).to have_content Item.first.title
     expect(page).to have_content Invoice.last.amount
+  end
+  describe "when using a coupon" do
+    describe "with a valid coupon" do
+      it 'discounts items from a seller based on a valid coupon'
+      it 'does not discount items if the user has not items from that seller'
+      it 'only discounts items from a seller when the cart has items from multiple sellers'
+      it 'allows for multiple seller discounts from multiple sellers'
+    end
+    describe "when using an invalid coupon" do
+      it 'allows users to remove a coupon code from checkout'
+      it 'rejects the coupon if the coupon code never existed'
+      it 'rejects the coupon for a code that has been marked as inactive'
+    end
   end
  end
 end
