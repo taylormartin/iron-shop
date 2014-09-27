@@ -51,4 +51,8 @@ private
     render json: { errors: obj.errors.full_messages }, status: 422
   end
 
+rescue_from CanCan::AccessDenied do |exception|
+  redirect_to root_url, flash[:alert] => exception.message
+end
+
 end

@@ -50,4 +50,30 @@ feature 'Selling' do
     expect( page ).to have_content 'not authorized'
   end
 
+  describe "when using coupons", :js do
+    before :each do
+      login @seller
+    end
+    it "allows sellers to see their coupons" do
+      @coupon = @seller.coupons.create! code: "abcde", discount: 10, status: true
+      visit coupons_path
+      expect(page).to have_content( @coupon.code )
+      expect(page).to have_content( @coupon.discount )
+    end
+
+    it "allows sellers to add a coupon", :focus do
+      visit coupons_path
+      click_on "New Coupon"
+      fill_in ""
+    end
+
+    it "allows sellers to remove a coupon" do
+
+    end
+
+    it "allows sellers to edit their coupon" do
+
+    end
+  end
+
 end
