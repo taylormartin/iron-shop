@@ -61,18 +61,26 @@ feature 'Selling' do
       expect(page).to have_content( @coupon.discount )
     end
 
-    it "allows sellers to add a coupon", :focus do
+    it "allows sellers to add a coupon" do
       visit coupons_path
       click_on "New Coupon"
-      fill_in ""
+      fill_in "couponCode", with: "abcde"
+      fill_in "discountPercentage", with: 10
+      click_on "Create Coupon"
+      expect(page).to have_text "abcde"
+      expect(page).to have_text 10
+      expect(page).to have_content "Set Inactive"
     end
 
-    it "allows sellers to remove a coupon" do
+    it "allows sellers to remove a coupon"
 
-    end
-
-    it "allows sellers to edit their coupon" do
-
+    it "allows sellers to toggle their coupon status" do
+      @seller.coupons.create( code: "zzzzz", discount: 20, status: true )
+      visit coupons_path
+      expect(page).to have_content "Set Inactive"
+      click_on "Set Inactive"
+      expect(page).to have_content "Active"
+      expect(page).to have_content "Set Active"
     end
   end
 

@@ -54,9 +54,10 @@ describe CouponsController do
       end
 
       it "lets you edit a coupon" do
-        put :update, id: @coupon.id, code: "aaaaa", discount: 20, status: false
+        code = [('a'..'z')].sample(5).join
+        put :update, id: @coupon.id, code: code, discount: 20, status: false
         @coupon.reload
-        expect( @coupon.code ).to eq "aaaaa"
+        expect( @coupon.code ).to eq code
         expect( @coupon.discount ).to eq 20
         expect( @coupon.status ).to eq false
       end
@@ -71,6 +72,6 @@ describe CouponsController do
 
   def create_coupon(user = nil)
     user ||= @user
-    user.coupons.create!(code: "abcde", discount: 10, status: true)
+    create :coupon, user: user, status: true
   end
 end

@@ -21,6 +21,19 @@
             %h5.pull-left Subtotal
             %h5.pull-right= '{{subtotal | currency}}'
           %li.list-group-item.clearfix
+            .row
+              .col-md-2
+                %h5 Discounts
+              .col-md-3
+                %div(ng-repeat='code in codes_applied')
+                  .pull-left= '{{code}}'
+                  %span.glyphicon.glyphicon-remove.pull-right(ng-click="remove_code(code)")
+              .col-md-5
+                %input.codeInput(type="text" name= "codeInput" ng-model="codeInput")
+                %button.btn.btn-default.btn-xs(ng-click="add_code()") Apply
+              .col-md-2
+                %h5.pull-right= '{{discount | currency}}'
+          %li.list-group-item.clearfix
             %h5.pull-left Tax Rate
             %h5.pull-right= '{{tax_rate * 100}}%'
           %li.list-group-item.clearfix
