@@ -23,12 +23,14 @@ class ApplicationController < ActionController::Base
   end
 
   def build_cart
-    @cart = Cart.new current_user, item_ids: (session[:cart] || [])
+    @cart = Cart.new current_user, item_ids: (session[:cart] || []), coupons: session[:coupons]
   end
 
   def set_gon_data
     gon.items = @cart.items
     gon.subtotal = @cart.subtotal
+    gon.discount = @cart.discount
+    gon.codes_applied = @cart.codes_applied
     gon.tax_rate = @cart.tax_rate
     gon.total = @cart.total
   end

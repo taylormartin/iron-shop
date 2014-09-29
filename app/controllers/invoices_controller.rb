@@ -9,6 +9,7 @@ class InvoicesController < ApplicationController
     @invoice.items << cart.items
     if @invoice.save
       session[:cart] = []
+      session[:coupons] = []
       redirect_to invoice_path(@invoice), notice: "Successfully checked out"
     else
       redirect_to cart_path, alert: "Unable to check out"

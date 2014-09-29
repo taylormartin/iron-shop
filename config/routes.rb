@@ -15,6 +15,11 @@ Rails.application.routes.draw do
     get "/data" => "carts#data"
     post "/add-cart/:id" => "carts#add_cart", :as => "add_cart"
     delete "/remove-cart/:id" => "carts#remove_cart"
+
+    scope '/code' do
+      post "/:code" => "carts#add_code"
+      delete "/:code" => "carts#delete_code"
+    end
   end
 
 end
