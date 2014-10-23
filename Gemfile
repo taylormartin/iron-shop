@@ -11,14 +11,11 @@ gem 'haml-rails'
 gem 'figaro'
 gem 'gon'
 gem 'bullet'
-<<<<<<< HEAD
 gem 'sinatra', '>= 1.3.0', :require => nil
 
 gem 'sidekiq'
 gem 'sidetiq'
-=======
 gem 'stripe'
->>>>>>> 6f16082b679baff3daeac4d92226ab041ba5d2e8
 
 
 gem 'jbuilder', '~> 2.0'
