@@ -1,0 +1,7 @@
+.couponForm .ng-dirty.ng-invalid {
+    border: 2px solid #ffaeac;
+}
+
+.couponForm .ng-dirty.ng-valid {
+    border: 2px solid #d3fbde;
+}

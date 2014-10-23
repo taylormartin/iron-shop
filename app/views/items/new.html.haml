@@ -1,6 +1,6 @@
 %h3 List An Item!
 
--if current_user.role == 'seller'
+-if can? :crud, Item
   = form_for @item, url: {action: "create"}, html: {class: "form"} do |i|
     = i.label :title
     %br

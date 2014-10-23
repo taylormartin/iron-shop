@@ -1,0 +1,21 @@
+.modal.fade#new-coupon-modal(tabindex="-1" role="dialog")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4.modal-title New Coupon
+      =form_tag coupons_path, :name => "couponForm", :class => "couponForm", :novalidate => "", :"ng-submit" => "formSubmit()", :remote => true do
+        .modal-body
+          .well
+            .row
+              .col-md-6
+                %label(for="couponCode") Coupon Code:
+                %br
+                %label(for="discountPercentage") Discount Percentage:
+              .col-md-6
+                %input(type="text" name="couponCode" ng-model="form.couponCode" ng-minlength="5" ng-maxlength="20" required)
+                %p(ng-show='couponForm.couponCode.$dirty && couponForm.couponCode.$error.required') Code Required!
+                %input(type="number" name="discountPercentage" ng-model="form.discountPercentage" required)
+                %p(ng-show='couponForm.discountPercentage.$dirty && couponForm.discountPercentage.$error.required') Percentage Required
+                %p(ng-show='couponForm.discountPercentage.$dirty && couponForm.discountPercentage.$error.number') Must be a number
+        .modal-footer(ng-show="couponForm.$valid")
+          %button.btn.btn-primary Create Coupon

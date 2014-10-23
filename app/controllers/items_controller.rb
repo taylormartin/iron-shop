@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
 
   def index
+    authorize! :show, Item
     if params["search"]
       search_results = PgSearch.multisearch params["search"]
       item_ids = []
@@ -14,6 +15,7 @@ class ItemsController < ApplicationController
   end
 
   def create
+    authorize! :crud, Item
     @item = Item.new create_params.merge(seller_id: current_user.id)
     if @item.save
       flash[:notice] = "Listing successfully created"
@@ -29,10 +31,12 @@ class ItemsController < ApplicationController
 
   def show
     @watch = Watch.new
+    authorize! :show, Item
     @item = Item.find params[:id]
   end
 
   def update
+    authorize! :crud, Item
     @item = Item.find params[:id]
     if @item.update update_params
       flash[:notice] = "Listing successfully updated"
