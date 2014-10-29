@@ -24,7 +24,7 @@ bundle install
 
 Then set up the database:
 
-Note: You will need Postgres installed on your computer to run this app.
+Note: You will need PostgreSQL installed on your computer to run this app.
 
 ```
 rake db:setup
